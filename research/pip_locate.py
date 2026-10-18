@@ -32,8 +32,8 @@ def char_for(px) -> str:
 
 
 def main() -> int:
-    from hoi4copilot.process.attach import Game
-    from hoi4copilot.ui.session import SessionDriver
+    from hoi4_mcp.process.attach import Game
+    from hoi4_mcp.ui.session import SessionDriver
     arr = SessionDriver(Game()).shot()
     h, w = arr.shape[:2]
     x0, y0, x1, y1 = (0.68, 0.005, 0.95, 0.13)

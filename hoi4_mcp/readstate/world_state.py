@@ -31,7 +31,7 @@ try:
     from ..saveparse.tokens import load_tokens
 except ImportError:
     sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-    from hoi4copilot.saveparse.tokens import load_tokens
+    from hoi4_mcp.saveparse.tokens import load_tokens
 
 from .bin5_scaffold import walkthrough, find_countries, find_matching, country_anchors
 
@@ -327,8 +327,7 @@ def top_lines(save_path=None, data=None, scaffold=None) -> str:
 
 if __name__ == "__main__":
     path = sys.argv[1] if len(sys.argv) > 1 else (
-        r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/"
-        r"save games/GER_1936_02_25_08.hoi4")
+        str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_02_25_08.hoi4"))
     ws = world_summary(path)
     print(f"save {ws['path']} {ws['size']/1e6:.1f}MB")
     for c in ws["countries"][:60]:

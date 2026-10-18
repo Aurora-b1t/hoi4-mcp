@@ -38,7 +38,7 @@ def find_install_dir() -> Path:
         if (p / EXE_NAME).is_file():
             return p
 
-    candidates_file = _PROJECT_ROOT / "hoi4copilot_install.json"
+    candidates_file = _PROJECT_ROOT / "hoi4_mcp_install.json"
     if candidates_file.is_file():
         p = Path(json.loads(candidates_file.read_text())["install_dir"])
         if (p / EXE_NAME).is_file():

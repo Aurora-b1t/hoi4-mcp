@@ -16,8 +16,8 @@ from collections import defaultdict
 
 import numpy as np
 
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process.attach import Game
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process.attach import Game
 from probe import load_db
 
 

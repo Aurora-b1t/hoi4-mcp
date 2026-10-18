@@ -16,9 +16,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 
-from hoi4copilot import config
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process.attach import Game
+from hoi4_mcp import config
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process.attach import Game
 
 db = json.loads((config.TABLES_DIR / "rtti.json").read_text())
 gs = [c for c in db["classes"] if c["name"] == ".?AVCGameState@@"][0]

@@ -2,14 +2,14 @@
 
 keystone's python binding encodes the source as ASCII, so a stray CJK character
 in a `//` comment makes the payload refuse to assemble. Run after editing
-hoi4copilot/inject/script.py's _ASM block.
+hoi4_mcp/inject/script.py's _ASM block.
 """
 from __future__ import annotations
 
 import re
 from pathlib import Path
 
-P = Path(__file__).resolve().parents[1] / "hoi4copilot" / "inject" / "script.py"
+P = Path(__file__).resolve().parents[1] / "hoi4_mcp" / "inject" / "script.py"
 
 
 def main() -> int:

@@ -47,8 +47,8 @@ try:
     from ..saveparse import saveinfo
 except ImportError:
     sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-    from hoi4copilot.saveparse.tokens import load_tokens
-    from hoi4copilot.saveparse import saveinfo
+    from hoi4_mcp.saveparse.tokens import load_tokens
+    from hoi4_mcp.saveparse import saveinfo
 
 from .world_state import (
     scalar_value, walkthrough, find_countries, find_matching,
@@ -1013,8 +1013,7 @@ def format_sections(tag: str, sec: dict, max_rows: int = 14) -> str:
 
 if __name__ == "__main__":
     path = sys.argv[1] if len(sys.argv) > 1 else (
-        r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/"
-        r"save games/GER_1936_03_31_11.hoi4")
+        str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_03_31_11.hoi4"))
     tags = [a for a in sys.argv[2:] if a.isupper()]
     cn = Countries(path)
     if not tags:

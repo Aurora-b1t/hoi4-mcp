@@ -5,9 +5,9 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-sys.path.insert(0, r"D:/hoi4-copilot")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.readstate.world_state import (
+from hoi4_mcp.readstate.world_state import (
     walkthrough, find_countries, country_anchors, statement_member_scan,
     scalar_value, NAMES, header_stmts,
 )
@@ -62,14 +62,13 @@ def depth_members(data, pos, kind, depth, span, open_i, close_i, d0):
 
 
 def find_matching(kind, open_i):
-    from hoi4copilot.readstate.bin5_scaffold import find_matching as fm
+    from hoi4_mcp.readstate.bin5_scaffold import find_matching as fm
     return fm(kind, open_i)
 
 
 def main():
     path = sys.argv[1] if len(sys.argv) > 1 else (
-        r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/"
-        r"save games/GER_1936_03_31_11.hoi4")
+        str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_03_31_11.hoi4"))
     data = Path(path).read_bytes()
     start = data.find(b"HOI4bin5*") + 9
     pos, kind, depth, span = walkthrough(data, start)

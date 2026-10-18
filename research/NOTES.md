@@ -166,7 +166,7 @@
   +0x00 sentinel, +0x08 id(u64), +0x10 nameptr(短串内联自指, 长串指针出镜像),
   +0x18 u32=21|u32=len+1, +0x30 内联 name。
 - 今日落盘: tables/generated/tokens.json = 10763 tokens (Python
-  `-m hoi4copilot.saveparse.tokens` 即提取, id→字符串名键值对)。
+  `-m hoi4_mcp.saveparse.tokens` 即提取, id→字符串名键值对)。
 
 ### ★ bin5 格式全解 (orz - 3 大坑一路踩平)
 - 魔数真正 9 字节 `HOI4bin5\x2A`, 无压缩, 直接 token 流。
@@ -249,7 +249,7 @@ v1 的"0.96% 键噪声"与"states 内部失步"全部归因于 **两个 token �
 - **focus** 子体 = { progress / current / paused } — current=国策 id 字符串
   (`GER_the_four_year_plan`)；progress 原始单位=1/100000 (10.0/35日)。
 
-### ★ 读层新工具面 (hoi4copilot/readstate/ + mcp_server `hoi4_world_state()`)
+### ★ 读层新工具面 (hoi4_mcp/readstate/ + mcp_server `hoi4_world_state()`)
 - `world_summary(path)` -> header(player/date/difficulty/version) + 439 国
 - `top_lines()` -> 摘要文本 (player/date + majors/PP-first 40 国的
   PP/stab/wsup/slots/tree)
@@ -629,7 +629,7 @@ war_support 同理 (30 基础 → UI 35%)。country_sem 的 pol 输出=基础值
 ### ★ 会话录制回放 (ui/recorder.py + hoi4_record/hoi4_replay)
 - Input 层包装(幂等 attach, 原始方法存 `_rec_orig` 防双层包裹):
   click/right_click/wheel/key 全记 JSONL
-  `{dt, kind, x?, y?, hold?, vk?, note?}` → ~/.hoi4copilot/recordings/。
+  `{dt, kind, x?, y?, hold?, vk?, note?}` → ~/.hoi4_mcp/recordings/。
 - Recorder.replay: 按 dt/speed 重放(driver.input), 末尾证据截图;
   replay-check 自检(步数/计划等待/无点击干跑)。
 - **E2E live**: 录「暂停→运行→暂停往返」(2 clicks + 2 notes) →
@@ -947,7 +947,7 @@ DynamicCode=0x0 / CFG=0x0, 但 **UserShadowStack policy = 0x100** (bit8-9=01 ⇒
   — 本机装 CreamAPI (appid=255710=Cities Skylines!), DLC 内容不在
   common/national_focus 磁盘文件中 (live 内存是唯一 truth source);
   disk 独有的 502 = v1 (堆指针-only) 提取器漏掉的 SSO 串, v2 已全收;
-- **交付物**: hoi4copilot/inject/focus_ids.py (scan_focus_ids proc只读 一次
+- **交付物**: hoi4_mcp/inject/focus_ids.py (scan_focus_ids proc只读 一次
   vftable 扫 ~20s + 全库 id↔名); MCP 工具 **hoi4_focus_ids(prefix)** (+1021
   → 工具面 21 个); 研究产物 research/focus_ids_live.json (438 GER 条 +
   全库); tests/test_inject_focus_ids.py 6 用例 (MSVC 串解码 SSO/堆/拒错/
@@ -1010,7 +1010,7 @@ DynamicCode=0x0 / CFG=0x0, 但 **UserShadowStack policy = 0x100** (bit8-9=01 ⇒
   ①不挂起任何线程 (21 日"第二发死"的温床消失) ②不新建线程 (新线程没有游戏
   的线程局部状态, 这正是协议 B 被 TLS 打死的原因) ③载荷在该线程自己的 TLS
   语境里 ④APC 返回后 ntdll 用 NtContinue 恢复被打断的上下文, 线程原地续跑。
-- 载荷 (hoi4copilot/inject/apc.py, 139B, capstone 逐条复核):
+- 载荷 (hoi4_mcp/inject/apc.py, 139B, capstone 逐条复核):
   `xchg` 原子 claim (单发单用, 多线程排队也只有一发真跑) → 把 post/queue/blob/
   count 预取进 r13/r14/r15/rbp (关键: **首次调用后绝不重读 job**) → 换私有栈 →
   `operator new(size)` → `rep movsq` 拷 blob → `Post(queue, cmd, force=0)` →
@@ -1064,7 +1064,7 @@ DynamicCode=0x0 / CFG=0x0, 但 **UserShadowStack policy = 0x100** (bit8-9=01 ⇒
   minidump 定位。
 
 ### 交付物
-- `hoi4copilot/inject/apc.py` (ApcChannel + 139B 载荷 + 单发单用 claim + 槽位布局);
+- `hoi4_mcp/inject/apc.py` (ApcChannel + 139B 载荷 + 单发单用 claim + 槽位布局);
 - `inject/commands.py`: `send_apc()` / `speed_step_apc()` / `post_focus_apc()`
   (graft 的 `send_fused()` 保留为研究回退);
 - MCP: `hoi4_inject_speed` 改走 APC (不再有 2s 冷却/一令一会话), 新增
@@ -1093,7 +1093,7 @@ DynamicCode=0x0 / CFG=0x0, 但 **UserShadowStack policy = 0x100** (bit8-9=01 ⇒
 暂停, tag=1, 机器已重启过 → 23 日的僵尸进程问题自然消失)。定下的两条线:
 **A. 把通道从「固定载荷」升级成可复用的写原语**; **B. SetNationalFocus E2E**。
 
-### ★★ 交付 1: write v3.1 = 微 VM 载荷 (`hoi4copilot/inject/script.py`)
+### ★★ 交付 1: write v3.1 = 微 VM 载荷 (`hoi4_mcp/inject/script.py`)
 23 日的载荷只会一件事 (new+拷 blob+Post)。要把「内存写」做成能力, 得有能在游戏
 线程上跑**一串**内存操作的载荷。新载荷 (keystone 汇编, 704B) 实现一个小 VM:
 
@@ -1170,7 +1170,7 @@ arena 内 AV/call 0/callee 内 call 0 **全绿**, 宿主存活; 32KB 故意溢�
   (UI 自己传的就是这个地址) + focus 对象指针。
 - **新工具链**: `research/find_vft_refs.py` (vtable xref → ctor/工厂),
   `research/command_spec_hunt.py` (RTTI vftable + ctor 字段写 + new 尺寸 +
-  UI 调用点上下文), `hoi4copilot/inject/specverify.py` (**离线**校验器):
+  UI 调用点上下文), `hoi4_mcp/inject/specverify.py` (**离线**校验器):
   ① vftable 必须属于该命令的 RTTI 类 ② spec 里的 ctor 必须真的装载这个 vftable
   ③ 尺寸必须覆盖 ctor 的每一次写 (≥ 最后字段末) ④ `blob_ok=True` 只允许在
   「blob 字段覆盖 ctor 全部写」时成立。全部通过才算 verified。
@@ -1185,8 +1185,8 @@ arena 内 AV/call 0/callee 内 call 0 **全绿**, 宿主存活; 32KB 故意溢�
 - `tests/test_inject_specs.py` (13 用例) 把 ①②③④ 变成回归网; pytest 70→**83** 全绿。
 
 ### 交付物 (24 日)
-- `hoi4copilot/inject/script.py` (微 VM + 护盾 + ScriptChannel + Script builder);
-- `hoi4copilot/inject/specverify.py` (离线 spec 校验), `inject/tables.py`
+- `hoi4_mcp/inject/script.py` (微 VM + 护盾 + ScriptChannel + Script builder);
+- `hoi4_mcp/inject/specverify.py` (离线 spec 校验), `inject/tables.py`
   (布局/尺寸/ctor 修正 + verified/blob_ok), `inject/commands.py`
   (`send_ctor_apc` / `post_focus_ctor`, blob 路径门禁, `speed_step_apc` 改走 ctor),
   `inject/focus_ids.py` (`scan_focus_ids_objects` 返回对象地址);
@@ -1404,7 +1404,7 @@ tables.py、没有真机验证**。记录方法与结果, 供下一轮直接接�
   mov [rcx+0x30],r8` / 尺寸 0x38, 参考表 ARGS=2 `0x24:deref, 0x28:ptr` ——
   与本平台逐条对上(偏移 +4/+8 是已知平台位移);
 - 两条都写进 `tables.py` (`verified=True`, `blob_ok=True`), 过
-  `python -m hoi4copilot.inject.specverify`: vftable 归属 ✓ / ctor 装载 vftable ✓ /
+  `python -m hoi4_mcp.inject.specverify`: vftable 归属 ✓ / ctor 装载 vftable ✓ /
   尺寸覆盖 ✓ / 字段覆盖 ✓ / 调用点尺寸 ✓ (**表内 7 条全 OK**);
 - `CommandLayer.drop_focus_ctor()` 走 ctor 忠实路径 —— **真机 E2E 已跑通** (见下);
   `bypass_focus_ctor(focus_obj)` 同形, **真机待验**;
@@ -1472,9 +1472,9 @@ tables.py、没有真机验证**。记录方法与结果, 供下一轮直接接�
 
 | 文件 | 变化 |
 |---|---|
-| `hoi4copilot/inject/script.py` | op 记录布局定案(a2..a5=rcx/rdx/r8/r9, op7 a5=size<<40) / Ref→RESULT 槽 / read_ptr 绝对地址 / `_resolved` 单次解析 / 栈参数删除并拒绝(968B) |
-| `hoi4copilot/inject/tables.py` | +`DropCurrentNationalFocus` (verified) +`BypassNationalFocus` (verified) |
-| `hoi4copilot/inject/commands.py` | +`drop_focus_ctor()` +`bypass_focus_ctor()` |
+| `hoi4_mcp/inject/script.py` | op 记录布局定案(a2..a5=rcx/rdx/r8/r9, op7 a5=size<<40) / Ref→RESULT 槽 / read_ptr 绝对地址 / `_resolved` 单次解析 / 栈参数删除并拒绝(968B) |
+| `hoi4_mcp/inject/tables.py` | +`DropCurrentNationalFocus` (verified) +`BypassNationalFocus` (verified) |
+| `hoi4_mcp/inject/commands.py` | +`drop_focus_ctor()` +`bypass_focus_ctor()` |
 | `research/apc_probe/script_dryrun.py` | phase B/C 重排 + 新场景 (全绿) |
 | `research/apc_probe/_abi_check.py` `_readptr_check.py` `_manual_send.py` | 一次性真机替身探针(保留) |
 | `tests/test_inject_script.py` | 25 用例: 布局/引用/拒绝路径/因果性/单次解析 |
@@ -1513,7 +1513,7 @@ tables.py、没有真机验证**。记录方法与结果, 供下一轮直接接�
 | 项 | 结果 |
 |---|---|
 | `pytest -q` | 96 passed / 66.75s(入表 SetResearch 后 98 passed) |
-| `python -m hoi4copilot.inject.specverify` | 8/8 OK(新增 SetResearch 在内) |
+| `python -m hoi4_mcp.inject.specverify` | 8/8 OK(新增 SetResearch 在内) |
 | 载荷 import 期结构断言 | 过; `PAYLOAD` = **968 B**, 入口 0 |
 | 身份链(只读 `research/_probe_now.py`) | gamestate/idler/gameapp 三槽实例 vftable 全匹配 |
 | guard | `log=singleplayer tcp_open=0 save_flag=False verdict=singleplayer` |

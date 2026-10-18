@@ -1,4 +1,4 @@
-"""hoi4-copilot: let an external agent play Hearts of Iron IV via an MCP server.
+"""hoi4-mcp: let an external agent play Hearts of Iron IV via an MCP server.
 
 Reads game state straight from the process (never pausing it) and executes
 actions through the game's own player command queue (the same path mouse

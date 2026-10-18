@@ -3,10 +3,12 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hoi4-copilot"
+name = "hoi4-mcp"
 version = "0.1.0"
-description = "MCP server + memory layer that lets an external agent play Hearts of Iron IV like a player (single-player, non-ironman, no console cheats)"
+description = "MCP server + instrumentation layer that lets an external agent observe and play Hearts of Iron IV like a player (read via RPM/save parsing, act through the game's own command queue; single-player, non-ironman, no console cheats)"
+readme = "README.md"
 requires-python = ">=3.12"
+keywords = ["hoi4", "hearts-of-iron", "mcp", "mcp-server", "agent", "game-automation", "reverse-engineering"]
 dependencies = [
     "mcp>=1.0",
     "pefile>=2024.8.26",
@@ -17,9 +19,12 @@ dependencies = [
     "mss>=9.0",
 ]
 
+[project.urls]
+Repository = "https://github.com/Aurora-b1t/hoi4-mcp"
+
 [project.scripts]
-hoi4-selftest = "hoi4copilot.selftest:main"
-hoi4-server = "hoi4copilot.mcp_server:main"
+hoi4-selftest = "hoi4_mcp.selftest:main"
+hoi4-server = "hoi4_mcp.mcp_server:main"
 
 [tool.setuptools.packages.find]
-include = ["hoi4copilot*"]
+include = ["hoi4_mcp*"]

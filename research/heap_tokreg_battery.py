@@ -20,9 +20,9 @@ from collections import Counter, defaultdict
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process.attach import Game
-from hoi4copilot.process.instances import _readable_regions
-from hoi4copilot.process import win32ext as w
+from hoi4_mcp.process.attach import Game
+from hoi4_mcp.process.instances import _readable_regions
+from hoi4_mcp.process import win32ext as w
 
 PAIRS = [
     (0x00EE, b"Operation Postern v1.19.3.0.c01a (5632)"),

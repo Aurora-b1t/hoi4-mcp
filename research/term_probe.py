@@ -10,8 +10,8 @@ import struct
 import sys
 from pathlib import Path
 
-sys.path.insert(0, r"D:/hoi4-copilot/")
-sys.path.insert(0, r"D:/hoi4-copilot/research")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "research"))
 
 from bin5_struct import token_len
 
@@ -169,5 +169,5 @@ def phase_a(paths, start_after=COUNTRIES_ANCHOR):
 
 
 if __name__ == "__main__":
-    paths = sys.argv[1:] or [r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/save games/GER_1936_02_25_08.hoi4"]
+    paths = sys.argv[1:] or [str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_02_25_08.hoi4")]
     phase_a(paths)

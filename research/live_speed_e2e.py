@@ -21,9 +21,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot import config, safety                                   # noqa: E402
-from hoi4copilot.inject.commands import CommandLayer                     # noqa: E402
-from hoi4copilot.process.attach import Game, find_live_pids              # noqa: E402
+from hoi4_mcp import config, safety                                   # noqa: E402
+from hoi4_mcp.inject.commands import CommandLayer                     # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids              # noqa: E402
 
 SAVE_DIR = config.DOCS_ROOT / "save games"
 SHOTS = Path(__file__).resolve().parents[1] / "shots"
@@ -33,7 +33,7 @@ CROP = (0.70, 0.005, 0.94, 0.078)
 
 def capture(tag: str):
     from PIL import Image
-    from hoi4copilot.ui.session import SessionDriver
+    from hoi4_mcp.ui.session import SessionDriver
     from research.speed_pips import band, classify
     d = SessionDriver(Game())
     arr = d.shot()

@@ -10,7 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.saveparse import bin5 as B
+from hoi4_mcp.saveparse import bin5 as B
 
 
 def render(v, depth=0, max_items=6):

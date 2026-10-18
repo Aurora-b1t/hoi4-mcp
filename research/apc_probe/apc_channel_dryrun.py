@@ -27,11 +27,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from hoi4copilot.inject.apc import (ApcChannel, SHELLCODE, JOB_SIZE, J_CLAIM,   # noqa: E402
+from hoi4_mcp.inject.apc import (ApcChannel, SHELLCODE, JOB_SIZE, J_CLAIM,   # noqa: E402
                                     J_TID, J_DONE, J_CMD, J_POSTED, J_NEW, J_POST,
                                     J_QUEUE, J_SIZE, J_BLOB, J_NQWORD, J_STACK)
-from hoi4copilot.process import win32ext as w                                   # noqa: E402
-from hoi4copilot.process.attach import AttachedProcess                          # noqa: E402
+from hoi4_mcp.process import win32ext as w                                   # noqa: E402
+from hoi4_mcp.process.attach import AttachedProcess                          # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 FAKE_BASE = 0x000

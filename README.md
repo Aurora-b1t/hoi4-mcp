@@ -1,8 +1,22 @@
-# HOI4 Copilot (hoi4-copilot)
+# hoi4-mcp
 
-给外部 Agent(如 ZCode/Claude)提供一个 **Hearts of Iron IV 1.19.3.0** 的 MCP Server:
+给外部 Agent(如 Claude/ZCode)提供一个 **Hearts of Iron IV 1.19.3.0** 的 MCP Server:
 观察游戏状态,并像正常玩家一样操作游戏(暂停/调速/存档/装载/地图操作)。
 **不使用控制台 cheat,不写作弊数值。**
+
+**命名对照**(项目名 = 仓库名 = `hoi4-mcp`):
+
+| 位置 | 名字 |
+|---|---|
+| 仓库 / pip 发行包 | `hoi4-mcp` |
+| Python import 包 | `hoi4_mcp` |
+| MCP 工具前缀 | `hoi4_*`(如 `hoi4_state`、`hoi4_inject_post`) |
+| 命令行入口 | `hoi4-server` / `hoi4-selftest` |
+| 本地数据目录 | `~/.hoi4_mcp/`(截图与点击录制) |
+
+> 本项目原名 **hoi4-copilot**;更名后仓库为 `hoi4-mcp`,代码与文档里的包名同步
+> 改为 `hoi4_mcp`,工具名(`hoi4_*`)与命令行入口保持不变。
+> 本地 checkout 目录叫什么与项目名无关(`pip install -e .` 在仓库根执行即可)。
 **v2/v3 方向(参考 Clausewitz-MCP)**:读 = 进程内存直读(实时、不暂停),写 =
 CSession::Post 命令注入(玩家点击的同一队列),投递用 **special user APC**(23 日
 起,见下);截图/SendInput UI 模拟降级为测试期用具。
@@ -19,26 +33,36 @@ CSession::Post 命令注入(玩家点击的同一队列),投递用 **special use
 
 ## 安装
 
-前提:Windows x64、HOI4 v1.19.3.0(检查一起交的 pinned 版本表)、Python 3.12。
+前提:Windows x64、HOI4 v1.19.3.0(见仓库内 pinned 版本表 `hoi4_mcp/tables/generated/`)、
+Python 3.12。
 
 ```powershell
-pip install -e "D:\hoi4-copilot"
+git clone https://github.com/Aurora-b1t/hoi4-mcp
+cd hoi4-mcp
+pip install -e .
 ```
 
 游戏安装路径自动识别(`D:\Steam\steamapps\common\Hearts of Iron IV` 等候选),
 也可写环境变量 `HOI4_INSTALL=D:/你的路径/Hearts of Iron IV`。
 
+> 仓库内容边界:证据截图(`shots/`、`research/shots/`,约 700MB)与 agent 会话转储
+> (`research/_session_dump/`)不入库,只在本机留存;清单见 `.gitignore`。
+> 因此文档里引用的 `shots/*.png` 是本地取证路径,不是仓库文件。
+
 ## 启动 MCP Server(stdio)
 
 ```powershell
-hoi4-server          # 或 python -m hoi4copilot.mcp_server
+hoi4-server          # 或 python -m hoi4_mcp.mcp_server
 ```
 
 接线示例(zcode-mcp.json / Claude Desktop 风格):
 
 ```json
-{ "mcpServers": { "hoi4": { "command": "python", "args": ["-m", "hoi4copilot.mcp_server"] } } }
+{ "mcpServers": { "hoi4": { "command": "python", "args": ["-m", "hoi4_mcp.mcp_server"] } } }
 ```
+
+> 仓库里的 `zcode-mcp.json` 是本机在用的样例:其中 `cwd` 指向本地 checkout 目录
+> (名字随意,只要求该目录下有 `hoi4_mcp/` 这个包);`args` 里的模块名才是项目名相关项。
 
 ## 工具面 (v1 18 个 + v3 inject 4 个 = 22)
 
@@ -94,7 +118,7 @@ hoi4-server          # 或 python -m hoi4copilot.mcp_server
   **上真机前必须先在替身跑道全绿**: `research/apc_probe/script_dryrun.py`
   (三相位: 无盾必死 / 全 op + 全故障 / 私有栈洪水)。
 
-**命令 spec 必须离线验证 (24 日新纪律)**:`python -m hoi4copilot.inject.specverify`
+**命令 spec 必须离线验证 (24 日新纪律)**:`python -m hoi4_mcp.inject.specverify`
 检查 ①vftable 属于该命令的 RTTI 类 ②表里的 ctor 真的装载这个 vftable ③对象尺寸
 覆盖 ctor 的每一次写 ④`blob_ok=True` 仅在 blob 字段覆盖全部 ctor 写时成立。
 24 日血案就是 ①的缺失: 21 日把 **CSetFuelPriorityCommand 的 ctor 当成了
@@ -104,7 +128,7 @@ SetNationalFocus 的**, 手搓 blob 于是 vtable 对、字段全错 → 游戏 
 ### 安全层 (19 日)
 
 - **仅单人盟约强制**: 9 个写工具(含 replay/record/hover)全部过 `_write_refusal()`:
-  ① `HOI4_READ_ONLY=1` → 一律拒; ② 三源守卫(`hoi4copilot/safety.py`)判出
+  ① `HOI4_READ_ONLY=1` → 一律拒; ② 三源守卫(`hoi4_mcp/safety.py`)判出
   多人会话(game.log `[[ Launching MULTIPLAYER-game ]]` / hoi4.exe 活 TCP 连接 /
   存档 `multiplayer` token) → 拒, `HOI4_ALLOW_MP=1` 为开发者显式豁免。
 - 守卫证据随时可查: `hoi4-selftest guard`。
@@ -117,7 +141,7 @@ SetNationalFocus 的**, 手搓 blob 于是 vtable 对、字段全错 → 游戏 
 | 模块 | 能力 |
 |---|---|
 | `saveparse.bin5` | HOI4bin5 语法层递归解析器(1.8M 语句/档, 全档吃满) |
-| `saveparse.tokens` | save-key id→名注册表(10763 条, 从运行时镜像提取, `python -m hoi4copilot.saveparse.tokens` 重建) |
+| `saveparse.tokens` | save-key id→名注册表(10763 条, 从运行时镜像提取, `python -m hoi4_mcp.saveparse.tokens` 重建) |
 | `saveparse.saveinfo` | 存档头部快解: 玩家/意识形态/难度/**日期**(`date = 60759359 + 1936-01-01 起游戏小时`, 无闰年历法) |
 | `readstate.country_sem` | 单国语义提取器(14 区块; 数值口径: 0x000D=/1e5、0x0167=/1e6 定点、party%/1e5 直接是百分比) |
 | `readstate.global_tables` | 全局 join 表: 装备 archetype(生产线/库存 id→名)、师模板名、自定义变体名、角色名(12545 角色) |
@@ -128,7 +152,7 @@ SetNationalFocus 的**, 手搓 blob 于是 vtable 对、字段全错 → 游戏 
 | `research/find_vft_refs.py` | (24 日) vtable xref 扫描: 找出装载某个 vftable 的 ctor/工厂与 UI 调用点 |
 | `research/command_spec_hunt.py` | (24 日) 命令 spec 猎人: RTTI vftable + ctor 入口(含 `--full` 参数用法推导) + `operator new` 尺寸 + UI 调用点上下文 |
 | `research/spec_batch.py` | (24 日) 批量跑 spec 猎人, 并附参考项目(Linux)表同一行做结构对照 — 命令表扩张的入口 |
-| `hoi4copilot/inject/specverify.py` | (24 日) spec 离线校验器 (RTTI/ctor/尺寸/字段覆盖), 未过验证的命令写层拒发 |
+| `hoi4_mcp/inject/specverify.py` | (24 日) spec 离线校验器 (RTTI/ctor/尺寸/字段覆盖), 未过验证的命令写层拒发 |
 | `tests/` | (25 日) pytest 回归套件 **96 用例**: bin5 配平/saveinfo 日期/守卫三源/synthetic MP token/focus 树解析+avail/country_sem 语义/techdata 图/inject 表静态检查/APC+VM 载荷字节级断言(op 记录布局·引用解析·因果性·单次解析)/命令 spec 对二进制验证 |
 
 读状态的黄金路径(两条):
@@ -182,7 +206,7 @@ GATED 行带不可离线求值的 available 触发器——选前 UI 复核一�
 ## 架构
 
 ```
-外部 Agent (MCP client) ⇄ hoi4copilot.mcp_server (stdio)
+外部 Agent (MCP client) ⇄ hoi4_mcp.mcp_server (stdio)
    ├─ 读: tools/screenshot (DPI感知/TOPMOST/PrintWindow→mss 兜底)
    │      process/attach + rtti + instances (ReadProcessMemory 实例索引, 只读安全)
    │      runtime_state.read_date (CGameDate vftable 扫描 → 日期候选)
@@ -315,7 +339,7 @@ GATED 行带不可离线求值的 available 触发器——选前 UI 复核一�
    [CSession+0x58]容器 vfn[+0x28]); operator new=0x21C9AF0; queue=[CGameApp+0x380];
    静态全局槽位 G_GAMESTATE=0x332F260 (类=CCurrentGameState!)/G_IDLER=0x332F698/
    G_GAMEAPP=0x3452450/G_QUEUE=0x3451DA8; 玩家 tag=gamestate+0x520 (Linux +8)。
-   全表在 `hoi4copilot/inject/tables.py` (RVA 锚定 spp, 版本锁 "1.19.3.0")。
+   全表在 `hoi4_mcp/inject/tables.py` (RVA 锚定 spp, 版本锁 "1.19.3.0")。
 4. ~~命令构造器~~ → **速度族已闭环**: CIncrease/DecreaseGameSpeed 走真 ctor
    (`send_ctor_apc`) 或 blob (Increase 的字段覆盖完整) → 注入 → **HUD 速度 pips
    真机验证 ✓**。**24 日定案: SetNationalFocus 的字段布局是 `tag@0x28`(来自
@@ -386,7 +410,7 @@ GATED 行带不可离线求值的 available 触发器——选前 UI 复核一�
 8. (24 日新增交付) **write v3.1**: `inject/script.py` 微 VM 载荷 (CALL/READ/WRITE/
    WRITE_RAW/MEMSET/ALLOC_CTOR/CALL_THIS) + **VEH 崩坏护盾** (真机验收: 故意 fault
    后游戏存活且读数不变); **ctor 忠实投递** (`send_ctor_apc`: new→真 ctor→Post) +
-   `hoi4copilot/inject/specverify.py` 离线 spec 校验 (RTTI/ctor/尺寸/字段覆盖) +
+   `hoi4_mcp/inject/specverify.py` 离线 spec 校验 (RTTI/ctor/尺寸/字段覆盖) +
    写层对未验证 spec 的拒发门禁; 修正表错: SetNationalFocus 真布局 (tag@0x28,
    **CNationalFocus\* @0x30** — 旧 focus_id@0x2C/mode@0x30 属别的类)、
    DecreaseGameSpeed 尺寸 0x40→**0x48** (ctor 里有个 std::string)、SetGameSpeed
@@ -429,7 +453,7 @@ SetNationalFocus 手搓 blob 打死游戏 (vtable 对/字段错, WER 0xc0000005 
 0x24c2f0d), 真 ctor 0x1146F70 定案: **rdx=&tag, r8=CNationalFocus\***,
 +0x2C 不是字段。④新增 `specverify.py` 离线校验 + 写层拒发未验证 spec;
 顺带修正 DecreaseGameSpeed 尺寸 0x48 (含 std::string)、SetGameSpeed 0x30;
-⑤`hoi4copilot/inject/specverify.py` 离线 spec 校验 + 写层拒发未验证 spec;
+⑤`hoi4_mcp/inject/specverify.py` 离线 spec 校验 + 写层拒发未验证 spec;
 顺带修正 DecreaseGameSpeed 尺寸 0x48 (含 std::string)、SetGameSpeed 0x30;
 `find_vft_refs.py` / `command_spec_hunt.py` = 命令 spec 猎人工具链;
 pytest 54→**83**。⑩24 日真机验收 (**三条独立证据链**): **SetNationalFocus E2E 闭环** ✓

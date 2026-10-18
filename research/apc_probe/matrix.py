@@ -37,9 +37,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from hoi4copilot.process import win32ext as w                      # noqa: E402
-from hoi4copilot.process.attach import AttachedProcess             # noqa: E402
-from hoi4copilot.inject.call import RemoteCaller, CallError        # noqa: E402
+from hoi4_mcp.process import win32ext as w                      # noqa: E402
+from hoi4_mcp.process.attach import AttachedProcess             # noqa: E402
+from hoi4_mcp.inject.call import RemoteCaller, CallError        # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 VICTIM = HERE / "victim.py"

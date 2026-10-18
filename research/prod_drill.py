@@ -4,12 +4,12 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from hoi4copilot.saveparse.tokens import load_tokens
-from hoi4copilot.readstate.bin5_scaffold import walkthrough, find_matching
-from hoi4copilot.readstate.country_sem import (Countries, member_list,
+from hoi4_mcp.saveparse.tokens import load_tokens
+from hoi4_mcp.readstate.bin5_scaffold import walkthrough, find_matching
+from hoi4_mcp.readstate.country_sem import (Countries, member_list,
                                                run_to_values, dict_of,
                                                markers_of)
-from hoi4copilot.readstate.world_state import scalar_value
+from hoi4_mcp.readstate.world_state import scalar_value
 
 NAMES = load_tokens()
 
@@ -106,6 +106,5 @@ def main(path):
 
 if __name__ == "__main__":
     p = sys.argv[1] if len(sys.argv) > 1 else (
-        r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/"
-        r"save games/GER_1936_03_31_16.hoi4")
+        str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_03_31_16.hoi4"))
     main(p)

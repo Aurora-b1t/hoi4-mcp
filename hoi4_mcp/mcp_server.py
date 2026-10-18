@@ -1,4 +1,4 @@
-"""MCP server exposing HOI4 copilot tools (v1).
+"""MCP server exposing the hoi4-mcp tool surface.
 
 Read tools observe the live game process/state; action tools act through the
 in-game UI (player-equivalent input: real clicks on the running client). The
@@ -27,7 +27,7 @@ from . import safety
 REPLAY_DIFF_LIMIT = 8.0
 
 mcp = MCPServer("hoi4", instructions=(
-    "Hearts of Iron IV copilot. Observe via screenshots/state, decide, then act "
+    "Hearts of Iron IV MCP server (hoi4-mcp). Observe via screenshots/state, decide, then act "
     "through the player-equivalent UI controls. Keep the game PAUSED while "
     "reading to snapshot a stable state. All coordinates are client-normalized "
     "(0..1)."
@@ -161,7 +161,7 @@ def hoi4_hud(kind: str = "full") -> str:
     """Capture the game window (kind: full | topbar | date | small) and return PNG path(s)."""
     try:
         d = resolve_driver()
-        from hoi4copilot.tools import screenshot as shot
+        from hoi4_mcp.tools import screenshot as shot
         arr = shot.capture_smart(d.pid)
         if arr is None:
             return "error: capture failed"
@@ -182,7 +182,7 @@ def hoi4_state() -> str:
     """Running/paused (via ticking pixel check over the date panel) + date-panel crop path."""
     try:
         d = resolve_driver()
-        from hoi4copilot.tools import screenshot as shot
+        from hoi4_mcp.tools import screenshot as shot
         state = d.state()
         arr = shot.capture_smart(d.pid)
         crop = _crop(arr, 0.60, 0.03, 1.0, 0.12)
@@ -229,7 +229,7 @@ def hoi4_click(x: float, y: float) -> str:
     try:
         d = resolve_driver()
         d.input.click(x, y)
-        from hoi4copilot.tools import screenshot as shot
+        from hoi4_mcp.tools import screenshot as shot
         arr = shot.capture_smart(d.pid)
         return f"clicked ({x:.3f},{y:.3f}); shot={_save_shot(arr, 'after_click')}"
     except Exception as exc:
@@ -371,7 +371,7 @@ def hoi4_dismiss(kind: str = "outside") -> str:
             res = "outside-click sent"
         else:
             return f"error: unknown kind {kind} (menu|outside)"
-        from hoi4copilot.tools import screenshot as shot
+        from hoi4_mcp.tools import screenshot as shot
         arr = shot.capture_smart(d.pid)
         return f"{res}; shot={_save_shot(arr, 'after_dismiss')}"
     except Exception as exc:
@@ -393,7 +393,7 @@ def hoi4_hover(x: float, y: float) -> str:
         d = resolve_driver()
         d.input.move(x, y)
         time.sleep(1.0)   # let the tooltip element animate in
-        from hoi4copilot.tools import screenshot as shot
+        from hoi4_mcp.tools import screenshot as shot
         arr = shot.capture_smart(d.pid)
         return f"hover ({x:.3f},{y:.3f}); shot={_save_shot(arr, 'after_hover')}"
     except Exception as exc:
@@ -424,7 +424,7 @@ def hoi4_popup(recall: int = 0) -> str:
             return (f"icon={icon or 'undecidable'} (recall mode, no fresh "
                     f"capture)\nlast shots newest-first: "
                     + " | ".join(str(p) for p in rec_files))
-        from hoi4copilot.tools import screenshot as shot
+        from hoi4_mcp.tools import screenshot as shot
         arr = shot.capture_smart(d.pid)
         if arr is None:
             return "error: capture failed"
@@ -460,7 +460,7 @@ def hoi4_record(action: str = "status") -> str:
                 return failed
             if REC_STATE["recorder"] is None:
                 d = resolve_driver()
-                from hoi4copilot.tools import screenshot as shot
+                from hoi4_mcp.tools import screenshot as shot
                 from .ui.recorder import Recorder, RECORDING_DIR, attach_input
                 rec = Recorder()
                 REC_STATE["recorder"] = rec
@@ -514,7 +514,7 @@ def hoi4_replay(path: str, speed: float = 1.0, force: bool = False) -> str:
     try:
         import json as _json
         from pathlib import Path as _P
-        from hoi4copilot.tools import screenshot as shot
+        from hoi4_mcp.tools import screenshot as shot
         p = _P(path)
         if not p.is_file():
             return f"error: no recording at {path}"

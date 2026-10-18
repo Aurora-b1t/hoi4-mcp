@@ -15,8 +15,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process.attach import AttachedProcess
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process.attach import AttachedProcess
 
 VICTIM_SRC = "import time\nwhile True:\n    time.sleep(0.05)\n"
 

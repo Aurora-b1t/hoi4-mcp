@@ -26,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from research.win_disasm import disasm, pe                              # noqa: E402
 
-RTTI = Path(__file__).resolve().parents[1] / "hoi4copilot" / "tables" / "generated" / "rtti.json"
+RTTI = Path(__file__).resolve().parents[1] / "hoi4_mcp" / "tables" / "generated" / "rtti.json"
 
 
 def classes_by_name() -> dict:

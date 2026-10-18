@@ -19,10 +19,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process.attach import Game, find_live_pids               # noqa: E402
-from hoi4copilot.process.instances import (scan_for_vftable_ptr,          # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids               # noqa: E402
+from hoi4_mcp.process.instances import (scan_for_vftable_ptr,          # noqa: E402
                                            _readable_regions)
-from hoi4copilot.readstate.techdata import TechDB                         # noqa: E402
+from hoi4_mcp.readstate.techdata import TechDB                         # noqa: E402
 
 VFT_PRIMARY = 0x2974EE0
 VFT_SECOND = 0x2974F30

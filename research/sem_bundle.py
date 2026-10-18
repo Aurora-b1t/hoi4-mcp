@@ -2,14 +2,14 @@
 flags sample / fuel hex / construction search inside states."""
 import sys
 from pathlib import Path
-sys.path.insert(0, r"D:/hoi4-copilot")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import struct
-from hoi4copilot.readstate.world_state import (
+from hoi4_mcp.readstate.world_state import (
     walkthrough, find_countries, country_anchors, statement_member_scan,
     NAMES, scalar_value)
-from hoi4copilot.readstate.bin5_scaffold import find_matching
+from hoi4_mcp.readstate.bin5_scaffold import find_matching
 
-SAVE = r'C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/save games/GER_1936_03_31_11.hoi4'
+SAVE = str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_03_31_11.hoi4")
 argv = [a for a in sys.argv[1:] if Path(a).is_file()]
 data = Path(argv[0] if argv else SAVE).read_bytes()
 pos, kind, depth, span = walkthrough(data, data.find(b'HOI4bin5*')+9)

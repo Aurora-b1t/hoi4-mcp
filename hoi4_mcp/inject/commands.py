@@ -119,7 +119,7 @@ class CommandLayer:
                 f"(verified={spec.get('verified')}, blob_ok={spec.get('blob_ok')}) — "
                 f"the ctor writes fields the blob cannot reproduce. Use "
                 f"send_ctor_apc() / hoi4_inject_post, or re-verify with "
-                f"research/command_spec_hunt.py + hoi4copilot.inject.specverify.")
+                f"research/command_spec_hunt.py + hoi4_mcp.inject.specverify.")
         blob = self.build_blob(spec, fields)
         r = self.apc.run(self.p.base + T.FN_OPERATOR_NEW, self.p.base + T.FN_POST,
                          self.queue, spec["size"], blob)

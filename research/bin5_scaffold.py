@@ -14,8 +14,8 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, r"D:/hoi4-copilot")
-sys.path.insert(0, r"D:/hoi4-copilot/research")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "research"))
 
 
 def walkthrough(data: bytes, start: int):
@@ -142,8 +142,7 @@ def country_anchors(data: bytes, pos, kind, depth, span, inner_open_i, close_i):
 
 if __name__ == "__main__":
     path = sys.argv[1] if len(sys.argv) > 1 else (
-        r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/"
-        r"save games/GER_1936_02_25_08.hoi4")
+        str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_02_25_08.hoi4"))
     data = Path(path).read_bytes()
     t0 = time.time()
     pos, kind, depth, span = walkthrough(data, data.find(b"HOI4bin5*") + 9)

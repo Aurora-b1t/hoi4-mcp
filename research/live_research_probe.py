@@ -31,12 +31,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot import config, safety                                   # noqa: E402
-from hoi4copilot.inject import script as S                               # noqa: E402
-from hoi4copilot.inject import tables as T                               # noqa: E402
-from hoi4copilot.inject.commands import CommandLayer                     # noqa: E402
-from hoi4copilot.process.attach import Game, find_live_pids              # noqa: E402
-from hoi4copilot.process.instances import scan_for_vftable_ptr           # noqa: E402
+from hoi4_mcp import config, safety                                   # noqa: E402
+from hoi4_mcp.inject import script as S                               # noqa: E402
+from hoi4_mcp.inject import tables as T                               # noqa: E402
+from hoi4_mcp.inject.commands import CommandLayer                     # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids              # noqa: E402
+from hoi4_mcp.process.instances import scan_for_vftable_ptr           # noqa: E402
 
 VFT_TECH = 0x2974EE0
 PAGE = 0x1000
@@ -98,7 +98,7 @@ def avail_techs() -> set[str]:
     path = max(SAVE_DIR.glob("*.hoi4"), key=lambda q: q.stat().st_mtime, default=None)
     if path is None:
         return set()
-    from hoi4copilot.readstate.country_sem import Countries, country_sections
+    from hoi4_mcp.readstate.country_sem import Countries, country_sections
     cn = Countries(path)
     tag = cn.player() or cn.tags()[0]
     f = country_sections(cn, tag, ["research"]).get(tag, {}).get("research", {})

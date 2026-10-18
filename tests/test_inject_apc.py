@@ -11,7 +11,7 @@ import struct
 
 import pytest
 
-from hoi4copilot.inject import apc as A
+from hoi4_mcp.inject import apc as A
 
 
 def insns() -> list[tuple[int, str, str]]:
@@ -194,7 +194,7 @@ def test_job_intact_trips_on_a_clobbered_input(field):
 def test_mitigation_bit_decode_documents_the_22_day_correction():
     """0x100 is bit 8 = CetDynamicApisOutOfProcOnly. SetContextIpValidation is
     bit 2 — the 22 日 'platform blockade' read the wrong bit."""
-    from hoi4copilot.process import win32ext as w
+    from hoi4_mcp.process import win32ext as w
     assert w.get_mitigation_policy.__doc__ is not None or True
     names = ["EnableUserShadowStack", "AuditUserShadowStack",
              "SetContextIpValidation", "AuditSetContextIpValidation",

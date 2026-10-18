@@ -37,7 +37,7 @@ def ger_save() -> Path:
 
 @pytest.fixture(scope="session")
 def game_install() -> Path:
-    from hoi4copilot.readstate import techdata
+    from hoi4_mcp.readstate import techdata
     root = techdata.install_dir()
     if root is None:
         root = os.environ.get("HOI4_INSTALL")

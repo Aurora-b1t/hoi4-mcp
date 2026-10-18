@@ -7,7 +7,7 @@ import pytest
 
 @pytest.fixture(scope="module")
 def tdb(game_install):
-    from hoi4copilot.readstate.techdata import TechDB
+    from hoi4_mcp.readstate.techdata import TechDB
     return TechDB()
 
 

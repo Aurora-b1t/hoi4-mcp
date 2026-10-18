@@ -12,12 +12,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process.attach import Game
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.ui.session import SessionDriver
-from hoi4copilot.inject.guard import write_refusal
-from hoi4copilot.inject.commands import CommandLayer
-from hoi4copilot.inject import tables as T
+from hoi4_mcp.process.attach import Game
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.ui.session import SessionDriver
+from hoi4_mcp.inject.guard import write_refusal
+from hoi4_mcp.inject.commands import CommandLayer
+from hoi4_mcp.inject import tables as T
 
 
 def snap_bands(p, addrs) -> dict[int, bytes]:
@@ -56,7 +56,7 @@ def main():
     if icon0 != "paused":
         print("NOT PAUSED — aborting inject test (discipline: paused only)")
         return
-    shot0 = d.save_shot(Path.home() / ".hoi4copilot" / "shots", "inject_before")
+    shot0 = d.save_shot(Path.home() / ".hoi4_mcp" / "shots", "inject_before")
     print("before shot:", shot0)
 
     layer = CommandLayer(g)
@@ -81,7 +81,7 @@ def main():
     time.sleep(1.0)
 
     icon1 = d.icon_state()
-    shot1 = d.save_shot(Path.home() / ".hoi4copilot" / "shots", "inject_after_up")
+    shot1 = d.save_shot(Path.home() / ".hoi4_mcp" / "shots", "inject_after_up")
     after = snap_bands(p, band_defs)
     diffs = diff_bands(before, after, {lbl: a for (lbl, a, _n) in band_defs})
     print(f"after: icon={icon1} shot={shot1}")
@@ -99,7 +99,7 @@ def main():
     print("  post #4:", r4)
     time.sleep(1.0)
     icon2 = d.icon_state()
-    shot2 = d.save_shot(Path.home() / ".hoi4copilot" / "shots", "inject_after_down")
+    shot2 = d.save_shot(Path.home() / ".hoi4_mcp" / "shots", "inject_after_down")
     restored = snap_bands(p, band_defs)
     diffs2 = diff_bands(before, restored, {lbl: a for (lbl, a, _n) in band_defs})
     print(f"final: icon={icon2} shot={shot2}")

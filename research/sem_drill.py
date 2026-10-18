@@ -1,13 +1,13 @@
 """Generic drill: path like production.military_lines into a country body."""
 import sys
 from pathlib import Path
-sys.path.insert(0, r"D:/hoi4-copilot")
-from hoi4copilot.readstate.world_state import (
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from hoi4_mcp.readstate.world_state import (
     walkthrough, find_countries, country_anchors, statement_member_scan,
     NAMES, scalar_value)
-from hoi4copilot.readstate.bin5_scaffold import find_matching
+from hoi4_mcp.readstate.bin5_scaffold import find_matching
 
-SAVE = r'C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/save games/GER_1936_03_31_11.hoi4'
+SAVE = str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_03_31_11.hoi4")
 
 def hexof(idx, n=14):
     p = int(pos[idx]); return ' '.join(f'{b:02x}' for b in data[p:p+n])

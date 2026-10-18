@@ -13,7 +13,7 @@ the fingerprint (sentinel RVA observed 0x9c5170 @ v1.19.3.0 checksum 5632 --
 computed from ImageBase to stay relocation-safe).
 
 Usage:
-  python -m hoi4copilot.saveparse.tokens          # from exe on disk
+  python -m hoi4_mcp.saveparse.tokens          # from exe on disk
   python research/... can pass --image-runtime later if needed
 Writes tables/generated/tokens.json: {"image_base":..., "magic_offsets":...,
 "tokens": {"<id decimal>": "name"}} to keep ids as JSON-int-decimal keys.

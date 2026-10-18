@@ -3,13 +3,13 @@
 """
 import sys
 from pathlib import Path
-sys.path.insert(0, r"D:/hoi4-copilot")
-from hoi4copilot.readstate.world_state import (
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from hoi4_mcp.readstate.world_state import (
     walkthrough, find_countries, country_anchors, statement_member_scan,
     NAMES, scalar_value)
-from hoi4copilot.readstate.bin5_scaffold import find_matching
+from hoi4_mcp.readstate.bin5_scaffold import find_matching
 
-SG = r'C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/save games'
+SG = str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games")
 
 def load(path):
     if Path(path).is_file():

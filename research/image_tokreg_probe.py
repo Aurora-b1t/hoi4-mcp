@@ -18,8 +18,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 
-from hoi4copilot.process.attach import Game
-from hoi4copilot.process import win32ext as w
+from hoi4_mcp.process.attach import Game
+from hoi4_mcp.process import win32ext as w
 
 ANCHORS = {
     0x00EE: "version-like",

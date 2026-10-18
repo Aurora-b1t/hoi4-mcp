@@ -17,10 +17,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np
 
-from hoi4copilot.process.attach import Game
-from hoi4copilot.process.instances import _readable_regions
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.saveparse.saveinfo import read_header, decode_date
+from hoi4_mcp.process.attach import Game
+from hoi4_mcp.process.instances import _readable_regions
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.saveparse.saveinfo import read_header, decode_date
 
 SG = Path.home() / "Documents/Paradox Interactive/Hearts of Iron IV/save games"
 

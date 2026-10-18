@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from hoi4copilot.saveparse.saveinfo import decode_date, encode_date
+from hoi4_mcp.saveparse.saveinfo import decode_date, encode_date
 
 
 def test_date_roundtrip():
@@ -20,7 +20,7 @@ def test_no_leap_year_calendar():
 
 
 def test_real_save_headers(ger_save):
-    from hoi4copilot.saveparse.saveinfo import read_header
+    from hoi4_mcp.saveparse.saveinfo import read_header
     h = read_header(ger_save, limit=16384)
     s = h.summary()
     assert "player=GER" in s or ger_save.name.startswith("autosave")

@@ -19,10 +19,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot import config, safety                                   # noqa: E402
-from hoi4copilot.inject import script as S                               # noqa: E402
-from hoi4copilot.inject.commands import CommandLayer                     # noqa: E402
-from hoi4copilot.process.attach import Game, find_live_pids              # noqa: E402
+from hoi4_mcp import config, safety                                   # noqa: E402
+from hoi4_mcp.inject import script as S                               # noqa: E402
+from hoi4_mcp.inject.commands import CommandLayer                     # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids              # noqa: E402
 
 FN_MAP, FN_CAN = 0xED5080, 0xED8F00
 SAVE_DIR = config.DOCS_ROOT / "save games"

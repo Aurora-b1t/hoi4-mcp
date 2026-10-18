@@ -6,8 +6,8 @@ import struct
 
 import pytest
 
-from hoi4copilot.inject import tables as T
-from hoi4copilot.inject.focus_ids import _string_field, VFT_FOCUS  # noqa: F401
+from hoi4_mcp.inject import tables as T
+from hoi4_mcp.inject.focus_ids import _string_field, VFT_FOCUS  # noqa: F401
 
 
 class _FakeMem:

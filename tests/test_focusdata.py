@@ -7,7 +7,7 @@ import pytest
 
 @pytest.fixture(scope="module")
 def fdb(game_install):
-    from hoi4copilot.readstate.focusdata import FocusDB
+    from hoi4_mcp.readstate.focusdata import FocusDB
     return FocusDB()
 
 

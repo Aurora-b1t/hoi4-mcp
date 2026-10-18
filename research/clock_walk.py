@@ -17,11 +17,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import numpy as np
 
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process import instances as inst
-from hoi4copilot.process.attach import Game
-from hoi4copilot.tools import screenshot as shot
-from hoi4copilot.tools.input import Input
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process import instances as inst
+from hoi4_mcp.process.attach import Game
+from hoi4_mcp.tools import screenshot as shot
+from hoi4_mcp.tools.input import Input
 
 SHOTS = Path(__file__).parent / "shots"
 V0 = 0x029C77F8          # dominant packed value while paused at 13:00 Jan 21

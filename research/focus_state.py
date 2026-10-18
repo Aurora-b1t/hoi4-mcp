@@ -17,7 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot import config                                          # noqa: E402
+from hoi4_mcp import config                                          # noqa: E402
 
 SAVE_DIR = config.DOCS_ROOT / "save games"
 
@@ -41,7 +41,7 @@ def main() -> int:
     tag = (args[1] if len(args) > 1 else "").upper()
     print(f"save: {path.name}  (mtime {path.stat().st_mtime:.0f})", file=sys.stderr)
 
-    from hoi4copilot.readstate.country_sem import (
+    from hoi4_mcp.readstate.country_sem import (
         Countries, country_sections, format_sections)
     cn = Countries(path)
     tag = tag or cn.player() or cn.tags()[0]

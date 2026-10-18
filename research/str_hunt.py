@@ -5,7 +5,7 @@ from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from hoi4copilot.readstate.bin5_scaffold import walkthrough
+from hoi4_mcp.readstate.bin5_scaffold import walkthrough
 
 def main(path, texts):
     data = Path(path).read_bytes()
@@ -43,8 +43,7 @@ def main(path, texts):
     print(f"done {time.time()-t0:.1f}s")
 
 if __name__ == "__main__":
-    DEFAULT = (r"C:/Users/hongyu_tang/Documents/Paradox Interactive/"
-               r"Hearts of Iron IV/save games/GER_1936_03_31_16.hoi4")
+    DEFAULT = (str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_03_31_16.hoi4"))
     args = sys.argv[1:]
     if args and Path(args[0]).suffix in (".hoi4", ".bin"):
         p, texts = args[0], args[1:]

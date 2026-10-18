@@ -2,7 +2,7 @@
   "mcpServers": {
     "hoi4": {
       "command": "python",
-      "args": ["-m", "hoi4copilot.mcp_server"],
+      "args": ["-m", "hoi4_mcp.mcp_server"],
       "cwd": "D:\\hoi4-copilot"
     }
   }

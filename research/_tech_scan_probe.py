@@ -23,15 +23,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process.attach import Game, find_live_pids               # noqa: E402
-from hoi4copilot.process.instances import scan_for_vftable_ptr            # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids               # noqa: E402
+from hoi4_mcp.process.instances import scan_for_vftable_ptr            # noqa: E402
 
 VFT_TECH = [0x2974EE0, 0x2974F30]      # .?AVCTechnology@@ (primary + 2nd)
 ASCII = re.compile(rb"[a-z][a-z0-9_]{3,60}")
 
 
 def tech_names() -> set[str]:
-    from hoi4copilot.readstate.techdata import TechDB
+    from hoi4_mcp.readstate.techdata import TechDB
     return set(TechDB().db().keys())
 
 

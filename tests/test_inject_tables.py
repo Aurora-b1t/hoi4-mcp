@@ -11,7 +11,7 @@ import struct
 
 import pytest
 
-from hoi4copilot.inject import tables as T
+from hoi4_mcp.inject import tables as T
 
 
 def test_base_init_matches_layout():
@@ -49,7 +49,7 @@ def test_shellcode_done_store_targets_param_register():
     rbx=011) — decode-check by hand."""
     import capstone
     md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
-    from hoi4copilot.inject import call as C
+    from hoi4_mcp.inject import call as C
 
     for name, blob in (("SHELLCODE", C.SHELLCODE), ("SHELLCODE_FUSED", C.SHELLCODE_FUSED)):
         ins = list(md.disasm(blob, 0))
@@ -68,7 +68,7 @@ def test_fused_shellcode_is_complete():
     """The fused shellcode: 5 callee-saved pushes, balanced, calls via [rbx+n]
     (param through a callee-saved register, r11 never held across a call)."""
     import capstone
-    from hoi4copilot.inject import call as C
+    from hoi4_mcp.inject import call as C
     md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
     text = [f"{i.mnemonic} {i.op_str}" for i in md.disasm(C.SHELLCODE_FUSED, 0)]
     pushes = [t for t in text if t.startswith("pop") is False]

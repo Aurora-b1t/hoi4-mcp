@@ -18,8 +18,8 @@ from __future__ import annotations
 
 import pytest
 
-from hoi4copilot.inject import tables as T
-from hoi4copilot.inject import specverify as SV
+from hoi4_mcp.inject import tables as T
+from hoi4_mcp.inject import specverify as SV
 
 
 @pytest.fixture(scope="module")
@@ -60,7 +60,7 @@ def test_setnationalfocus_layout_is_the_corrected_one():
 def test_unverified_specs_are_refused_by_the_writer():
     """The guard that would have prevented the 24 日 crash: never post a spec
     whose layout was not verified against the ctor."""
-    from hoi4copilot.inject.commands import CommandLayer, CallError
+    from hoi4_mcp.inject.commands import CommandLayer, CallError
 
     class _Fake:
         pass
@@ -90,7 +90,7 @@ def test_post_argument_order_from_the_binary(reports):
         "Post no longer treats rdx as the command object"
     assert "r8b, r8b" in joined, "Post no longer takes the force flag in r8"
 
-    from hoi4copilot.inject.script import Script
+    from hoi4_mcp.inject.script import Script
     sc = Script(allow_calls={(0, 1 << 64)})
     sc.call_obj(T.FN_POST, 1, 0xAA, 0)
     op = sc.ops[-1]

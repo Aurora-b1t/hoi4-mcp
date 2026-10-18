@@ -20,9 +20,9 @@ import struct
 
 import numpy as np
 
-from hoi4copilot import config
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process.attach import Game
+from hoi4_mcp import config
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process.attach import Game
 
 ANCHORS = [b"game_version\x00", b"difficulty\x00", b"player_ledger\x00",
            b"date\x00", b"ideology\x00", b"very_easy\x00", b"player\x00"]

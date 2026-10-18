@@ -17,7 +17,7 @@ def main() -> int:
     import keystone
     import capstone
 
-    src = (Path(__file__).resolve().parents[2] / "hoi4copilot" / "inject" /
+    src = (Path(__file__).resolve().parents[2] / "hoi4_mcp" / "inject" /
            "script.py").read_text(encoding="utf-8")
     start = src.index('_ASM = r"""') + len('_ASM = r"""')
     end = src.index('"""', start)

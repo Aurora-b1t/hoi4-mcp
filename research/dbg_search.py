@@ -1,8 +1,10 @@
 import sys
-sys.path.insert(0, r"D:\hoi4-copilot")
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import re
-from hoi4copilot import config
-from hoi4copilot.rtti.msvc import RttiDatabase
+from hoi4_mcp import config
+from hoi4_mcp.rtti.msvc import RttiDatabase
 
 db = RttiDatabase.load(config.TABLES_DIR / "rtti.json")
 print("db size:", len(db.by_name))

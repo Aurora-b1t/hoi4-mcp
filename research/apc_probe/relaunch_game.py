@@ -27,9 +27,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from hoi4copilot.tools import screenshot as S          # noqa: E402
-from hoi4copilot.tools.input import Input              # noqa: E402
-from hoi4copilot import config                         # noqa: E402
+from hoi4_mcp.tools import screenshot as S          # noqa: E402
+from hoi4_mcp.tools.input import Input              # noqa: E402
+from hoi4_mcp import config                         # noqa: E402
 
 SHOTS = Path(__file__).resolve().parents[2] / "shots"
 _u32 = ctypes.WinDLL("user32", use_last_error=True)

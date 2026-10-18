@@ -34,9 +34,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process.attach import AttachedProcess
-from hoi4copilot.inject.call import RemoteCaller, CallError
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process.attach import AttachedProcess
+from hoi4_mcp.inject.call import RemoteCaller, CallError
 
 k32 = ctypes.WinDLL("kernel32", use_last_error=True)
 k32.GetModuleHandleW.restype = ctypes.c_void_p
@@ -136,7 +136,7 @@ def main() -> None:
             print("LIVE sends are not part of this battery (one-injection "
                   "budget is reserved for a separate deliberate step).")
             return
-        from hoi4copilot.process.attach import Game
+        from hoi4_mcp.process.attach import Game
         game = Game()
         proc = game.proc
         print(f"LIVE probes against hoi4.exe pid={proc.pid} (read-only, "

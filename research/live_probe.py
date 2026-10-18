@@ -9,10 +9,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process.attach import Game
-from hoi4copilot.process import win32ext as w
+from hoi4_mcp.process.attach import Game
+from hoi4_mcp.process import win32ext as w
 
-RTTI = json.loads((Path(__file__).resolve().parents[1] / "hoi4copilot/tables/generated/rtti.json").read_text())
+RTTI = json.loads((Path(__file__).resolve().parents[1] / "hoi4_mcp/tables/generated/rtti.json").read_text())
 BY_VFT = {}
 for c in RTTI["classes"]:
     for r in c["vftable_rvas"]:

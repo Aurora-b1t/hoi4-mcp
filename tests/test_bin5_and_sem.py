@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from hoi4copilot.readstate.country_sem import (
+from hoi4_mcp.readstate.country_sem import (
     Countries, country_sections, format_sections)
 
 

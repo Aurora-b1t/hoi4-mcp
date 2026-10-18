@@ -25,8 +25,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.inject import tables as T                                # noqa: E402
-from hoi4copilot.process.attach import Game, find_live_pids               # noqa: E402
+from hoi4_mcp.inject import tables as T                                # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids               # noqa: E402
 
 NAMES_AT = (0x28, 0x78, 0x18, 0x38, 0x50, 0x98, 0xb8, 0xd8)
 

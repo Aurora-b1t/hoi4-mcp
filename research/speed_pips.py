@@ -27,8 +27,8 @@ SLOTS = 5
 
 
 def grab() -> np.ndarray:
-    from hoi4copilot.process.attach import Game
-    from hoi4copilot.ui.session import SessionDriver
+    from hoi4_mcp.process.attach import Game
+    from hoi4_mcp.ui.session import SessionDriver
     return SessionDriver(Game()).shot()
 
 

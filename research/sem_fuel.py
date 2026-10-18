@@ -1,12 +1,12 @@
 """Fuel scale calibration: raw int64s of fuel/max_fuel across countries+saves."""
 import sys, struct
 from pathlib import Path
-sys.path.insert(0, r"D:/hoi4-copilot")
-from hoi4copilot.readstate.world_state import walkthrough, find_countries, country_anchors, statement_member_scan
-from hoi4copilot.readstate.bin5_scaffold import find_matching
-from hoi4copilot.saveparse.saveinfo import decode_date
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from hoi4_mcp.readstate.world_state import walkthrough, find_countries, country_anchors, statement_member_scan
+from hoi4_mcp.readstate.bin5_scaffold import find_matching
+from hoi4_mcp.saveparse.saveinfo import decode_date
 
-SG = Path(r'C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/save games')
+SG = Path(str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games"))
 for name in sys.argv[1:] or []:
     pass
 files = [a for a in sys.argv[1:] if (SG / a).is_file()] or \
@@ -40,7 +40,7 @@ for fn, tg, vals in rows:
     _, rg = vals['fuel_gain']; _, rpo = vals['fuel_gain_per_oil']
     hdr = decode_from = None
     try:
-        from hoi4copilot.saveparse.saveinfo import read_header
+        from hoi4_mcp.saveparse.saveinfo import read_header
         hdr = read_header(SG / fn, limit=16384).date
     except Exception:
         hdr = '?'

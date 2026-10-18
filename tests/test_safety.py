@@ -6,8 +6,8 @@ import struct
 
 import pytest
 
-from hoi4copilot import safety
-from hoi4copilot.saveparse import bin5
+from hoi4_mcp import safety
+from hoi4_mcp.saveparse import bin5
 
 
 def _bin5_blob(*pairs: bytes) -> bytes:

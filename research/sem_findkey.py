@@ -1,15 +1,15 @@
 """Find where a given key sits in the save's token stream (depth/context)."""
 import sys
 from pathlib import Path
-sys.path.insert(0, r"D:/hoi4-copilot")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import numpy as np
-from hoi4copilot.saveparse.tokens import load_tokens
-from hoi4copilot.readstate.world_state import walkthrough
-from hoi4copilot.readstate.bin5_scaffold import find_matching
+from hoi4_mcp.saveparse.tokens import load_tokens
+from hoi4_mcp.readstate.world_state import walkthrough
+from hoi4_mcp.readstate.bin5_scaffold import find_matching
 
 NAMES = {v: k for k, v in load_tokens().items()}  # name -> id
 path = sys.argv[1] if len(sys.argv) > 1 and Path(sys.argv[1]).is_file() else \
-    r'C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/save games/GER_1936_03_31_11.hoi4'
+    str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_03_31_11.hoi4")
 keys = [a for a in sys.argv[1:] if a != path]
 data = Path(path).read_bytes()
 pos, kind, depth, span = walkthrough(data, data.find(b'HOI4bin5*') + 9)

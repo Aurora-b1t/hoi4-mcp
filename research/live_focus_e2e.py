@@ -29,14 +29,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot import config, safety                                   # noqa: E402
-from hoi4copilot.inject import tables as T                               # noqa: E402
-from hoi4copilot.inject.commands import CommandLayer                     # noqa: E402
-from hoi4copilot.inject.focus_ids import _string_field                   # noqa: E402
-from hoi4copilot.process import win32ext as w                            # noqa: E402
-from hoi4copilot.process.attach import (AttachedProcess, Game,             # noqa: E402
+from hoi4_mcp import config, safety                                   # noqa: E402
+from hoi4_mcp.inject import tables as T                               # noqa: E402
+from hoi4_mcp.inject.commands import CommandLayer                     # noqa: E402
+from hoi4_mcp.inject.focus_ids import _string_field                   # noqa: E402
+from hoi4_mcp.process import win32ext as w                            # noqa: E402
+from hoi4_mcp.process.attach import (AttachedProcess, Game,             # noqa: E402
                                         find_live_pids)
-from hoi4copilot.process.instances import scan_for_vftable_ptr           # noqa: E402
+from hoi4_mcp.process.instances import scan_for_vftable_ptr           # noqa: E402
 
 SAVE_DIR = config.DOCS_ROOT / "save games"
 DUMP = 0x120
@@ -77,7 +77,7 @@ def focus_state_from_latest() -> dict:
     path = max(SAVE_DIR.glob("*.hoi4"), key=lambda p: p.stat().st_mtime, default=None)
     if path is None:
         return {}
-    from hoi4copilot.readstate.country_sem import Countries, country_sections
+    from hoi4_mcp.readstate.country_sem import Countries, country_sections
     cn = Countries(path)
     tag = cn.player() or cn.tags()[0]
     sec = country_sections(cn, tag, ["focus"]).get(tag, {})
@@ -95,8 +95,8 @@ def save_via_ui() -> str:
     current newest GER save is copied aside first ("_backup_..._pre_focus.hoi4")
     and the confirmation is clicked if it appears.
     """
-    from hoi4copilot.ui.session import SessionDriver
-    from hoi4copilot.process.attach import Game
+    from hoi4_mcp.ui.session import SessionDriver
+    from hoi4_mcp.process.attach import Game
     newest = max(SAVE_DIR.glob("*.hoi4"), key=lambda p: p.stat().st_mtime, default=None)
     if newest is not None:
         backup = SAVE_DIR / f"_backup_{newest.stem}_pre_focus.hoi4"

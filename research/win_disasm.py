@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import capstone
 import pefile
 
-from hoi4copilot import config
+from hoi4_mcp import config
 
 _BIN = config.find_install_dir() / config.EXE_NAME
 

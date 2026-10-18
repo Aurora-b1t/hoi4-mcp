@@ -27,10 +27,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot import config, safety                                   # noqa: E402
-from hoi4copilot.inject import tables as T                               # noqa: E402
-from hoi4copilot.inject.commands import CommandLayer                     # noqa: E402
-from hoi4copilot.process.attach import Game, find_live_pids              # noqa: E402
+from hoi4_mcp import config, safety                                   # noqa: E402
+from hoi4_mcp.inject import tables as T                               # noqa: E402
+from hoi4_mcp.inject.commands import CommandLayer                     # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids              # noqa: E402
 
 SAVE_DIR = config.DOCS_ROOT / "save games"
 
@@ -41,7 +41,7 @@ def focus_state_from_latest() -> dict:
     path = max(SAVE_DIR.glob("*.hoi4"), key=lambda p: p.stat().st_mtime, default=None)
     if path is None:
         return {}
-    from hoi4copilot.readstate.country_sem import Countries, country_sections
+    from hoi4_mcp.readstate.country_sem import Countries, country_sections
     cn = Countries(path)
     tag = cn.player() or cn.tags()[0]
     sec = country_sections(cn, tag, ["focus"]).get(tag, {})
@@ -55,7 +55,7 @@ def focus_state_in(name: str) -> dict:
     path = SAVE_DIR / name
     if not path.exists():
         return {"save": name, "error": "missing"}
-    from hoi4copilot.readstate.country_sem import Countries, country_sections
+    from hoi4_mcp.readstate.country_sem import Countries, country_sections
     cn = Countries(path)
     tag = cn.player() or cn.tags()[0]
     f = country_sections(cn, tag, ["focus"]).get(tag, {}).get("focus", {})
@@ -65,7 +65,7 @@ def focus_state_in(name: str) -> dict:
 
 
 def save_via_ui() -> str:
-    from hoi4copilot.ui.session import SessionDriver
+    from hoi4_mcp.ui.session import SessionDriver
     newest = max(SAVE_DIR.glob("*.hoi4"), key=lambda p: p.stat().st_mtime, default=None)
     if newest is not None:
         backup = SAVE_DIR / f"_backup_{newest.stem}_pre_drop.hoi4"

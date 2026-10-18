@@ -38,9 +38,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import keystone                                                              # noqa: E402
-from hoi4copilot.inject import script as S                                   # noqa: E402
-from hoi4copilot.process import win32ext as w                                # noqa: E402
-from hoi4copilot.process.attach import AttachedProcess                       # noqa: E402
+from hoi4_mcp.inject import script as S                                   # noqa: E402
+from hoi4_mcp.process import win32ext as w                                # noqa: E402
+from hoi4_mcp.process.attach import AttachedProcess                       # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 PAGE_EXECUTE_READWRITE = 0x40

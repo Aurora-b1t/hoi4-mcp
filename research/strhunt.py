@@ -3,8 +3,9 @@ the QUOTED-token position q such that text spans [q+4, q+4+ln) and matches s,
 with any trailing bytes afterwards.
 """
 import sys, struct
-sys.path.insert(0, r"D:/hoi4-copilot")
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
 def find_string_tokens(data: bytes, s: bytes, start=0, limit_hits=200):
@@ -26,7 +27,7 @@ def find_string_tokens(data: bytes, s: bytes, start=0, limit_hits=200):
     return hits
 
 
-def report(s: bytes, path=r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/save games/GER_1936_02_25_08.hoi4"):
+def report(s: bytes, path=str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_02_25_08.hoi4")):
     data = Path(path).read_bytes()
     print(f"-- {s!r} --")
     hits = find_string_tokens(data, s)

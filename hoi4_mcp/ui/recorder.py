@@ -17,7 +17,7 @@ import json
 import time
 from pathlib import Path
 
-RECORDING_DIR = Path.home() / ".hoi4copilot" / "recordings"
+RECORDING_DIR = Path.home() / ".hoi4_mcp" / "recordings"
 
 
 class Recorder:

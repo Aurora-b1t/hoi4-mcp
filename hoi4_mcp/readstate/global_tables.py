@@ -20,7 +20,7 @@ try:
     from ..saveparse.tokens import load_tokens
 except ImportError:
     sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-    from hoi4copilot.saveparse.tokens import load_tokens
+    from hoi4_mcp.saveparse.tokens import load_tokens
 
 from .bin5_scaffold import find_matching
 from .country_sem import Countries, dict_of, markers_of

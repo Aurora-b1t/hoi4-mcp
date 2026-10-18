@@ -1,7 +1,7 @@
 """Render HOI4bin5 saves into human-readable semantic trees.
 
 Uses tables/generated/tokens.json (extracted from the live exe, see
-hoi4copilot.saveparse.tokens). Controls:
+hoi4_mcp.saveparse.tokens). Controls:
 
   python research/bin5_render.py <save.hoi4> [--depth N] [--maxlines N]
   python research/bin5_render.py <saveA.hoi4> <saveB.hoi4> --diff
@@ -13,8 +13,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.saveparse import bin5 as B
-from hoi4copilot.saveparse.tokens import load_tokens
+from hoi4_mcp.saveparse import bin5 as B
+from hoi4_mcp.saveparse.tokens import load_tokens
 
 
 def show_value(v, names, width=90):

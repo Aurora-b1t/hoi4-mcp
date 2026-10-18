@@ -5,7 +5,7 @@ import collections
 import re
 from pathlib import Path
 
-P = Path(__file__).resolve().parents[1] / "hoi4copilot" / "inject" / "script.py"
+P = Path(__file__).resolve().parents[1] / "hoi4_mcp" / "inject" / "script.py"
 
 
 def main() -> int:

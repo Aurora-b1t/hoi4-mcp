@@ -10,7 +10,7 @@ import re
 import sys
 from pathlib import Path
 
-RTTI = Path(__file__).resolve().parents[1] / "hoi4copilot" / "tables" / "generated" / "rtti.json"
+RTTI = Path(__file__).resolve().parents[1] / "hoi4_mcp" / "tables" / "generated" / "rtti.json"
 
 
 def main() -> int:

@@ -28,7 +28,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.inject import tables as T                              # noqa: E402
+from hoi4_mcp.inject import tables as T                              # noqa: E402
 from research.win_disasm import disasm, pe                              # noqa: E402
 from research.find_vft_refs import scan_lea_refs, vft_owner             # noqa: E402
 from research.win_callers import call_xrefs                             # noqa: E402
@@ -129,7 +129,7 @@ def full_hunt(tag: str, ctx: int = 0, dump: bool = False) -> dict:
     `tag` may be a bare command name (SetResearch), a class name
     (CSetResearchCommand) or a full RTTI name (.?AVCSetResearchCommand@@).
     """
-    d = json.loads((Path(__file__).resolve().parents[1] / "hoi4copilot" / "tables"
+    d = json.loads((Path(__file__).resolve().parents[1] / "hoi4_mcp" / "tables"
                     / "generated" / "rtti.json").read_text(encoding="utf-8"))
     classes = {c["name"]: c for c in d["classes"]}
     if tag.startswith(".?AV"):
@@ -202,7 +202,7 @@ def Image_writes(ctor_rva: int) -> dict[int, str]:
 def hunt(tag: str, spec: dict | None, vft: int | None = None, ctx: int = 0) -> dict:
     """Return a report for one command class."""
     name = tag if tag.startswith(".?AV") else f".?AVC{tag}Command@@"
-    d = json.loads((Path(__file__).resolve().parents[1] / "hoi4copilot" / "tables"
+    d = json.loads((Path(__file__).resolve().parents[1] / "hoi4_mcp" / "tables"
                     / "generated" / "rtti.json").read_text(encoding="utf-8"))
     classes = {c["name"]: c for c in d["classes"]}
     cls = classes.get(name)

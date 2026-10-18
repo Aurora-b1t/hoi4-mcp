@@ -283,7 +283,7 @@ class SessionDriver:
         arr = shot.capture_smart(self.pid)
         if arr is None:
             return None
-        d = Path.home() / ".hoi4copilot" / "shots"
+        d = Path.home() / ".hoi4_mcp" / "shots"
         d.mkdir(parents=True, exist_ok=True)
         p = d / f"{tag}_{int(time.time() * 1000) % 10**10}.png"
         shot.save_png(arr, p)

@@ -16,9 +16,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from hoi4copilot.inject.commands import CommandLayer     # noqa: E402
-from hoi4copilot.process.attach import Game              # noqa: E402
-from hoi4copilot import safety                           # noqa: E402
+from hoi4_mcp.inject.commands import CommandLayer     # noqa: E402
+from hoi4_mcp.process.attach import Game              # noqa: E402
+from hoi4_mcp import safety                           # noqa: E402
 
 
 def main() -> None:

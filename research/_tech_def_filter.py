@@ -22,9 +22,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.inject import tables as T                                # noqa: E402
-from hoi4copilot.process.attach import Game, find_live_pids               # noqa: E402
-from hoi4copilot.process.instances import scan_for_vftable_ptr            # noqa: E402
+from hoi4_mcp.inject import tables as T                                # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids               # noqa: E402
+from hoi4_mcp.process.instances import scan_for_vftable_ptr            # noqa: E402
 
 VFT = 0x2974EE0
 PAGE = 0x1000

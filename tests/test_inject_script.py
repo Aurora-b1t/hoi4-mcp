@@ -20,7 +20,7 @@ import struct
 
 import pytest
 
-from hoi4copilot.inject import script as S
+from hoi4_mcp.inject import script as S
 
 
 def insns() -> list[tuple[int, str, str]]:

@@ -1,4 +1,4 @@
-# AGENTS.md — 驾驶 HOI4 Copilot 的游玩规范
+# AGENTS.md — 驾驶 HOI4 MCP 的游玩规范
 
 给驱动本 MCP Server 的 Agent(agent)看的行为手册。
 你不是玩家本人,你通过工具对游戏窗口做「玩家等价」操作。
@@ -57,7 +57,7 @@
     NtContinue 恢复被打断的上下文原样续跑。载荷 = 原子 claim(单发单用,多余
     投递是空操作)→ 预取 post/queue/blob/count 进 callee-saved 寄存器(**首次
     调用后绝不重读 job**)→ 换槽位私有栈(~15.6KB)→ operator new + 拷 blob +
-    Post(force=0)。实现 `hoi4copilot/inject/apc.py` / `CommandLayer.send_apc()`;
+    Post(force=0)。实现 `hoi4_mcp/inject/apc.py` / `CommandLayer.send_apc()`;
     新工具 `hoi4_inject_post`(速度/暂停/SetNationalFocus)。
   - **23 日血案(必读)**:通道 v1 私有栈只有 3.8KB 且紧贴 job,真实 operator new
     的栈帧把 job 踩掉 → 载荷重读垃圾 → `call 0` → 游戏 BEX64 死亡。修法 = 槽位

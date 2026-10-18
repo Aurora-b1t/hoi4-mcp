@@ -10,7 +10,7 @@ import struct
 import capstone
 import pefile
 
-from hoi4copilot import config
+from hoi4_mcp import config
 
 pe_ = pefile.PE(str(config.find_install_dir() / config.EXE_NAME), fast_load=True)
 data = bytes(pe_.__data__)

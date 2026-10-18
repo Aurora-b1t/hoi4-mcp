@@ -12,8 +12,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot import config, safety                                    # noqa: E402
-from hoi4copilot.process.attach import Game, find_live_pids               # noqa: E402
+from hoi4_mcp import config, safety                                    # noqa: E402
+from hoi4_mcp.process.attach import Game, find_live_pids               # noqa: E402
 
 SAVE_DIR = config.DOCS_ROOT / "save games"
 
@@ -36,7 +36,7 @@ def main() -> int:
     p = g.proc
     m = p.memory
     print(f"proc: pid={p.pid} base={p.base:#x} image_size={p.image_size:#x}")
-    from hoi4copilot.inject import tables as T
+    from hoi4_mcp.inject import tables as T
     for name, slot, vft in (("gamestate", T.G_GAMESTATE, T.VFT_GAMESTATE),
                             ("idler", T.G_IDLER, T.VFT_IDLER),
                             ("gameapp", T.G_GAMEAPP, T.VFT_GAMEAPP)):
@@ -46,7 +46,7 @@ def main() -> int:
               f"vft_rva={got if got is None else hex(got)} "
               f"expected={vft:#x} match={got == vft}")
     try:
-        from hoi4copilot.inject.commands import CommandLayer
+        from hoi4_mcp.inject.commands import CommandLayer
         layer = CommandLayer(g)
         print(f"layer: gamestate={layer.gamestate:#x} queue={layer.queue:#x} "
               f"gate_open={layer.queue_gate_open()} paused={layer.is_paused()} "
@@ -55,7 +55,7 @@ def main() -> int:
         print("layer resolve failed:", exc)
 
     if newest is not None:
-        from hoi4copilot.readstate.country_sem import Countries, country_sections
+        from hoi4_mcp.readstate.country_sem import Countries, country_sections
         cn = Countries(newest)
         tag = cn.player() or cn.tags()[0]
         f = country_sections(cn, tag, ["focus"]).get(tag, {}).get("focus", {})

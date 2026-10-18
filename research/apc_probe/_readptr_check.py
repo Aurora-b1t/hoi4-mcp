@@ -7,9 +7,9 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import keystone
-from hoi4copilot.inject import script as S
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process.attach import AttachedProcess
+from hoi4_mcp.inject import script as S
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process.attach import AttachedProcess
 
 PAGE_EXECUTE_READWRITE = 0x40
 FAKE, META, PTRCELL = 0x000, 0x600, 0x900

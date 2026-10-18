@@ -9,8 +9,8 @@
 | 复核项 | 命令 | 结果 |
 |---|---|---|
 | 回归套件 | `python -m pytest -q` | **96 passed / 66.75s**（与 README 自述一致）；加入 SetResearch 条目后复跑 **98 passed** |
-| 命令 spec 离线校验 | `python -m hoi4copilot.inject.specverify` | **8/8 OK**（7 条原有 + 今日新增 SetResearch） |
-| 载荷可汇编性 | `import hoi4copilot.inject.script` | PAYLOAD = **968 B**，入口 0，import 期结构断言全过 |
+| 命令 spec 离线校验 | `python -m hoi4_mcp.inject.specverify` | **8/8 OK**（7 条原有 + 今日新增 SetResearch） |
+| 载荷可汇编性 | `import hoi4_mcp.inject.script` | PAYLOAD = **968 B**，入口 0，import 期结构断言全过 |
 | 会话身份链（只读） | `research/_probe_now.py` | gamestate/idler/gameapp 三个全局槽 → 实例 vftable **三方全匹配**（0x2721158 / 0x2968FF0 / 0x27182E0） |
 | 队列门 & 暂停位 | 同上 | `gate_open=True`、`paused=True`、player `tag=1`、`&tag=0x26e66926130` |
 | 多人守卫 | 同上 | `log=singleplayer tcp_open=0 save_flag=False verdict=singleplayer` |

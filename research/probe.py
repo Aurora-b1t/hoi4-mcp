@@ -11,10 +11,10 @@ from collections import Counter
 
 import numpy as np
 
-from hoi4copilot import config
-from hoi4copilot.process import instances as inst
-from hoi4copilot.process import win32ext as w
-from hoi4copilot.process.attach import Game
+from hoi4_mcp import config
+from hoi4_mcp.process import instances as inst
+from hoi4_mcp.process import win32ext as w
+from hoi4_mcp.process.attach import Game
 
 
 def load_db():

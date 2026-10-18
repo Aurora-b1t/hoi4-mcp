@@ -27,8 +27,8 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, r"D:/hoi4-copilot")
-sys.path.insert(0, r"D:/hoi4-copilot/research")
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "research"))
 
 try:
     from .saveparse.tokens import load_tokens
@@ -36,8 +36,8 @@ try:
 except ImportError:
     from research.bin5_scaffold import walkthrough, find_countries, find_matching  # noqa
     from research.country_scan import quick_country_index  # noqa
-    from hoi4copilot.saveparse.tokens import load_tokens
-    from hoi4copilot.saveparse.saveinfo import decode_date, DATE_EPOCH
+    from hoi4_mcp.saveparse.tokens import load_tokens
+    from hoi4_mcp.saveparse.saveinfo import decode_date, DATE_EPOCH
 
 from research.bin5_scaffold import walkthrough, find_countries, find_matching, country_anchors  # noqa
 
@@ -173,8 +173,7 @@ def world_summary(save_path):
 if __name__ == "__main__":
     import json
     path = sys.argv[1] if len(sys.argv) > 1 else (
-        r"C:/Users/hongyu_tang/Documents/Paradox Interactive/Hearts of Iron IV/"
-        r"save games/GER_1936_02_25_08.hoi4")
+        str(Path.home() / "Documents" / "Paradox Interactive" / "Hearts of Iron IV" / "save games" / "GER_1936_02_25_08.hoi4"))
     ws = world_summary(path)
     print(f"save {ws['path']} {ws['size']/1e6:.1f}MB")
     for c in ws["countries"][:60]:

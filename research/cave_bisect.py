@@ -40,9 +40,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from hoi4copilot.process.attach import AttachedProcess
-from hoi4copilot.inject.call import RemoteCaller, Context
-from hoi4copilot.process import win32ext as w
+from hoi4_mcp.process.attach import AttachedProcess
+from hoi4_mcp.inject.call import RemoteCaller, Context
+from hoi4_mcp.process import win32ext as w
 
 k32 = ctypes.WinDLL("kernel32", use_last_error=True)
 FN_TICK = int(k32.GetProcAddress(k32.GetModuleHandleW("kernel32.dll"), b"GetTickCount"))
