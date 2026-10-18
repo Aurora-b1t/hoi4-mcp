@@ -1,0 +1,13 @@
+10668 instances (18s)
+extract (0s): named=10668 unnamed=0
+dup names: [] count: 0
+dup ids: []
+GER count: 438
+GER_the_four_year_plan id: 58138
+  GER_the_four_year_plan -> 58138
+  GER_accelerate_the_rearmament_program -> 58147
+  GER_autarky_efforts -> 58139
+  GER_remilitarize_the_rhineland -> 58224
+  industrial_effort -> 58086
+  political_effort -> 58099
+saved focus_ids_live.json

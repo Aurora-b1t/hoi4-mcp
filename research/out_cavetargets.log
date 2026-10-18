@@ -1,0 +1,2 @@
+[ctl: GetTickCount entry] graft=True rip_now=0x0 rax=0x7ffa2ce889c0 restore_ok=True survives=False
+[mid: GetTickCount+0x40] graft=True rip_now=0x40 rax=0x1969ac64ea0 restore_ok=True survives=False

@@ -1,0 +1,27 @@
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
+
+# --- Local evidence (machine-specific, hundreds of MB) --------------------
+# Screenshots are captured per operation; keep them on disk, never in git.
+shots/
+research/shots/
+
+# --- Local agent-session scratch (private transcripts / session UUIDs) ----
+.zcode/
+research/_session_dump/
+research/_dump_session.py
+research/_read_session.py
+
+# --- Raw re-derivable dumps from hoi4.exe (see README: tables regeneration)
+research/NULL0.txt
+research/class_names.txt
+
+# --- Local overrides ------------------------------------------------------
+*_install.json

@@ -1,0 +1,83 @@
+{
+  "focus": {
+    "current": null,
+    "progress": 10.0,
+    "paused": null,
+    "tree": "german_focus",
+    "completed": [
+      "GER_the_four_year_plan"
+    ],
+    "n_completed": 1,
+    "banked_days": 10.0,
+    "available": [
+      {
+        "focus": "GER_accelerate_the_rearmament_program",
+        "cost": 5.0,
+        "tree": "german_focus",
+        "prereqs": [
+          "GER_the_four_year_plan"
+        ],
+        "est_days": 25.0
+      },
+      {
+        "focus": "GER_autarky_efforts",
+        "cost": 5.0,
+        "tree": "german_focus",
+        "prereqs": [
+          "GER_the_four_year_plan"
+        ],
+        "est_days": 25.0
+      },
+      {
+        "focus": "army_effort",
+        "cost": 10.0,
+        "tree": "generic_focus",
+        "est_days": 60.0
+      },
+      {
+        "focus": "aviation_effort",
+        "cost": 10.0,
+        "tree": "generic_focus",
+        "est_days": 60.0
+      },
+      {
+        "focus": "industrial_effort",
+        "cost": 10.0,
+        "tree": "generic_focus",
+        "est_days": 60.0
+      },
+      {
+        "focus": "political_effort",
+        "cost": 10.0,
+        "tree": "generic_focus",
+        "est_days": 60.0
+      },
+      {
+        "focus": "GER_construct_the_reichsautobahn",
+        "cost": 5.0,
+        "tree": "german_focus",
+        "prereqs": [
+          "GER_the_four_year_plan"
+        ],
+        "gated": true,
+        "bypass": true,
+        "est_days": 25.0
+      },
+      {
+        "focus": "GER_remilitarize_the_rhineland",
+        "cost": 5.0,
+        "tree": "german_focus",
+        "gated": true,
+        "bypass": true,
+        "est_days": 25.0
+      },
+      {
+        "focus": "naval_effort",
+        "cost": 10.0,
+        "tree": "generic_focus",
+        "gated": true,
+        "est_days": 60.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+10668 instances (21s)
+deep probe of one instance:
+  +0x00 0x00007ff706da9c08 inline=[]
+  +0x08 0x000000000000d2bf inline=[]
+  +0x10 0x00007ff706da9c88 inline=[]
+  +0x18 0x00000207a5acfd70 inline=[] -> AFG_support_king_zahir, generic_skip_one
+  +0x20 0x0000000000000000 inline=[]
+  +0x28 0x0000000000000016 inline=[]
+  +0x30 0x000000000000001f inline=[]
+  +0x38 0x00000207abcbcce0 inline=[] -> AFG_support_king_zahir, AFG_biding_our_t
+  +0x40 0x0000000000000000 inline=[]
+  +0x48 0x0000000000000016 inline=[]
+  +0x50 0x000000000000001f inline=[]
+  +0x58 0x00000000b466f50c inline=[]
+  +0x60 0x00000207abcbc9e0 inline=[] -> actories
+  +0x68 0x0000000000000000 inline=[]
+  +0x70 0x0000000000000015 inline=[]
+  +0x78 0x000000000000001f inline=[]
+  +0x80 0x00007ff706da9988 inline=[]
+  +0x88 0x00000207a5acf620 inline=[] -> AFG_against_kabu
+  +0x90 0x0000000100000001 inline=[]
+  +0x98 0x00007ff7076f5170 inline=[]
+  +0xa0 0x6e61646575716101 inline=['aquedan']
+  +0xa8 0x000000000000006f inline=[]
+  +0xb0 0x0000000000000000 inline=[]
+  +0xb8 0x000000000000000f inline=[]
+  +0xc0 0x0000bac37a6c6500 inline=[]
+  +0xc8 0x0000000000000000 inline=[]
+  +0xd0 0x0000000000000000 inline=[]
+  +0xd8 0x0000000000000000 inline=[]
+  +0xe0 0x0000000000000000 inline=[]
+  +0xe8 0x000000000000000f inline=[]
+  +0xf0 0x0000000000000000 inline=[]
+  +0xf8 0x0000000000000000 inline=[]
+
+bulk inline strings (300 instances):
+(0s) distinct strings: 30
+  'aquedano' x2 e.g. ('0x2079c90eac0', '0xa1')
+  'AFG_qargha_dam' x2 e.g. ('0x2079cbb2e40', '0x18')
+  'AFG_iron_mines' x2 e.g. ('0x2079cbb3ae0', '0x18')
+  'AFG_kajaki_dam' x2 e.g. ('0x2079cbb6d60', '0x18')
+  'AFG_salang_pass' x2 e.g. ('0x2079cbbb2d0', '0x18')
+  'AFG_adopt_nufus' x2 e.g. ('0x2079cbbdf00', '0x18')
+  'AFG_scavenging' x2 e.g. ('0x2079cbc17d0', '0x18')
+  'AFG_new_army' x2 e.g. ('0x2079cbc2ac0', '0x18')
+  'AFG_shipyards' x2 e.g. ('0x2079cbc4a50', '0x18')
+  'AFG_red_threat' x2 e.g. ('0x2079cbdf790', '0x18')
+  'AFG_topple_iran' x2 e.g. ('0x2079cbe62e0', '0x18')
+  'AFG_join_axis' x2 e.g. ('0x2079cbe9560', '0x18')
+  'AST_strongholds' x2 e.g. ('0x207a26ebc40', '0x18')
+  'AST_equal_pay' x2 e.g. ('0x207a26ee220', '0x18')
+  'AST_off_leash' x2 e.g. ('0x207a26f14a0', '0x18')
+  'AST_lang_plan' x2 e.g. ('0x207a26f40d0', '0x18')
+  'AST_radium_hill' x2 e.g. ('0x207a26f7ff0', '0x18')
+  'AST_recovery' x2 e.g. ('0x207a26fb270', '0x18')
+  'AST_new_deal' x2 e.g. ('0x207a26fb8c0', '0x18')
+  'AST_we_endured' x2 e.g. ('0x207a2705690', '0x18')
+  'AST_volunteers' x2 e.g. ('0x207a2706330', '0x18')
+  'AST_stephensen' x2 e.g. ('0x207a270e7c0', '0x18')
+  'AST_autarky' x2 e.g. ('0x207a2710da0', '0x18')
+  'AST_nauru_pact' x2 e.g. ('0x207a271ea90', '0x18')
+  'AST_world_peace' x2 e.g. ('0x207a27203d0', '0x18')
+  'AST_red_fred' x2 e.g. ('0x207a2726280', '0x18')
+  'n_fr' x1 e.g. ('0x2079cbb3ae0', '0x5c')
+  'RULE_DESC_IS_A_SUBJECT' x1 e.g. ('0x2079cbb3ae0', '0xa4')
+  'can_not' x1 e.g. ('0x2079cbb3ae0', '0xc1')
+  'declare' x1 e.g. ('0x2079cbb3ae0', '0xc9')

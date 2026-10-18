@@ -1,0 +1,5 @@
+# Normalize line endings in the repository; screenshots/binaries are opaque.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.hoi4 binary

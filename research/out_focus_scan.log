@@ -1,0 +1,6 @@
+attached pid=29156
+scan done in 26.0s
+vftable 0x2739c08: 10668 instances
+  first3: ['0x2079c90eac0', '0x2079c914fc0', '0x2079cbb27f0']
+vftable 0x2739c88: 10668 instances
+  first3: ['0x2079c90ead0', '0x2079c914fd0', '0x2079cbb2800']

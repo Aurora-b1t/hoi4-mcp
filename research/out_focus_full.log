@@ -1,0 +1,7 @@
+10668 instances (20s)
+extract done (0s); named=10121
+distinct names: 10121
+duplicate (id,name) pairs: 0 []
+unique ids with names: 10121
+GER_-prefixed focus names found: 427 [32711, 38126, 38128, 38129, 38134, 38135, 38136, 38138, 38139, 38144, 38145, 38148, 38149, 58116, 58117, 58119, 58120, 58121, 58122, 58123]
+saved research/focus_ids_live.json

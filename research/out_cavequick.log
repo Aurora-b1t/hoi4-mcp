@@ -1,0 +1,6 @@
+start
+victim pid=10724
+attached
+rc ok
+armed cave=0x7ffa2cbed738 arena=0x27091690000
+cycle#0: res=None err=victim died mid-poll alive=True (0.97s)

@@ -1,0 +1,10 @@
+cave=0x7ffa2cbed738 arena=0x1a5560e0000
+before: mbi arena: ('0x40', '0x1000', '0x20000')
+before: mbi cavepg: ('0x20', '0x1000', '0x1000000')
+job written ok
+cycle#0: res=None err=victim died mid-poll
+after: alive= False
+after: mbi arena: EXC 'NoneType' object has no attribute 'Protect'
+after: mbi cavepg: EXC 'NoneType' object has no attribute 'Protect'
+after: WPM arena: PermissionError [WinError 5] 拒绝访问。
+after: RIP probe of victim main: 0x0
